@@ -1,23 +1,13 @@
 package com.demo.common.util;
 
+import org.apache.commons.lang.StringUtils;
+
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.apache.commons.lang.StringUtils;
-import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
 
 public class ConcersUtils {
 
@@ -148,130 +138,7 @@ public class ConcersUtils {
 			}
 		}
 	}
-	public static class ESUtil {
 
-		/**
-		 * 统一参数设置
-		 * 
-		 * @param builder
-		 * @param vo
-		 * @return
-		 */
-		// public static BoolQueryBuilder getQueryBuilder(BoolQueryBuilder
-		// builder, MyConcernsDTO vo) {
-		// // 认证状态
-		// if (StringUtils.isNotEmpty(vo.getAuthcStatus())) {
-		// builder.must(getShouldQueryBuilder("authcStatus",
-		// CommonUtil.getStrList(vo.getAuthcStatus())));
-		// }
-		// // 学校
-		// if (vo.getUniversity() != null && vo.getUniversity().size() > 0) {
-		// BoolQueryBuilder should = getShouldQueryBuilder("university", new
-		// HashSet<String>(vo.getUniversity()));
-		// builder.must(should);
-		// }
-		// // 公众号类型
-		// if (vo.getOfficialAcctType() != null &&
-		// vo.getOfficialAcctType().size() > 0) {
-		// BoolQueryBuilder should = getShouldQueryBuilder("officialAcctType",
-		// new HashSet<String>(vo.getOfficialAcctType()));
-		// builder.must(should);
-		// }
-		// // 情感
-		// if (StringUtils.isNotEmpty(vo.getEmotion())) {
-		// builder.must(QueryBuilders.termQuery("emotion",
-		// MAP_EMOTION.get(vo.getEmotion())));
-		// }
-		// // 载体
-		// if (vo.getVector() != null && vo.getVector().size() > 0) {
-		// BoolQueryBuilder should = getShouldQueryBuilder("vector", new
-		// HashSet<String>(vo.getVector()));
-		// builder.must(should);
-		// }
-		// // 人物类型
-		// if (vo.getPersonageType() != null && vo.getPersonageType().size() >
-		// 0) {
-		// BoolQueryBuilder should = getShouldQueryBuilder("personageType",
-		// new HashSet<String>(vo.getPersonageType()));
-		// builder.must(should);
-		// }
-		// // 作者
-		// if (StringUtils.isNotEmpty(vo.getAuthor())) {
-		// builder.must(getShouldQueryBuilder("author",
-		// CommonUtil.getStrList(vo.getAuthor())));
-		// }
-		// // 报道人物
-		// if (vo.getReportPersonage() != null && vo.getReportPersonage().size()
-		// > 0) {
-		// BoolQueryBuilder should = getShouldQueryBuilder("reportPersonage",
-		// new HashSet<String>(vo.getReportPersonage()));
-		// builder.must(should);
-		// }
-		// return builder;
-		// }
-		// public static RangeQueryBuilder
-		// getRangeQueryBuilder(BaseBusinessToolDTO vo) {
-		// RangeQueryBuilder range =
-		// QueryBuilders.rangeQuery("publishDateTime");
-		// if (StringUtils.isNotEmpty(vo.getStartDate())) {
-		// range.gte(vo.getStartDate());
-		// }
-		// if (StringUtils.isNotEmpty(vo.getEndDate())) {
-		// range.lte(vo.getEndDate());
-		// }
-		// return range;
-		// }
-		/**
-		 * es should
-		 * 
-		 * @param fiedName
-		 * @param more
-		 * @return
-		 */
-		public static BoolQueryBuilder getShouldQueryBuilder(String fiedName, Set<String> more) {
-			BoolQueryBuilder or = new BoolQueryBuilder();
-			if (more != null && more.size() > 0) {
-				for (String str : more) {
-					or.should(QueryBuilders.termQuery(fiedName, str));
-				}
-			}
-			return or;
-		}
-
-		/**
-		 * es must
-		 * 
-		 * @param fiedName
-		 * @param more
-		 * @return
-		 */
-		public static BoolQueryBuilder getMustQueryBuilder(String fiedName, Set<String> more) {
-			BoolQueryBuilder and = new BoolQueryBuilder();
-			if (more != null && more.size() > 0) {
-				for (String str : more) {
-					and.must(QueryBuilders.termQuery(fiedName, str));
-				}
-			}
-			return and;
-		}
-
-		/**
-		 * es mustnot
-		 * 
-		 * @param fiedName
-		 * @param more
-		 * @return
-		 */
-		public static BoolQueryBuilder getMustNotQueryBuilder(String fiedName, Set<String> more) {
-			BoolQueryBuilder and = new BoolQueryBuilder();
-			if (more != null && more.size() > 0) {
-				for (String str : more) {
-					and.mustNot(QueryBuilders.termQuery(fiedName, str));
-				}
-			}
-			return and;
-		}
-	}
 	public static class DateUtil {
 
 		public static final String FORMAT_DATE = "yyyy-MM-dd";
